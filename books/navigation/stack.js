@@ -10,7 +10,13 @@ import PaymentMethod from "../screens/PaymentMethod";
 import PaymentInfo from "../screens/PaymentInfo";
 import PaymentSuccess from "../screens/PaymentSuccess";
 
-const Stack = createStackNavigator();
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+
+
+const Stack = createSharedElementStackNavigator();
+
+
+// const Stack = createStackNavigator();
 
 const AuthNavigator = () => {
   return (
@@ -29,6 +35,7 @@ const AuthNavigator = () => {
 const HomeNavigator = () => {
   return (
     <Stack.Navigator
+      mode="modal"
       screenOptions={{
         headerShown: false,
       }}
@@ -36,8 +43,21 @@ const HomeNavigator = () => {
     >
       <Stack.Screen name="Tabs" component={Tabs} />
       <Stack.Screen
+
         name="BookDetail"
         component={BookDetail}
+        sharedElements={(route, otherRoute, showing) => {
+            const { id } = route.params;
+            return [
+              {
+                id: `item.${id}.photo`,
+                animation: 'move',
+                resize: 'clip',
+                align: 'center'
+              },
+            ];
+            return [`item.${id}.photo`];
+          }}
         options={{ headerShown: false }}
       />
       <Stack.Screen

@@ -8,6 +8,8 @@ import {
 } from "react-native";
 import { COLORS, FONTS, icons, SHADOW, SIZES } from "../constants";
 import LineDivider from "../utils/LineDivider";
+import { SharedElement } from 'react-navigation-shared-element';
+
 
 const InfoBar = ({ value, name }) => {
   return (
@@ -29,21 +31,21 @@ const InfoBar = ({ value, name }) => {
   );
 };
 
-const BookInfoSection = ({ book, navigation }) => {
+const BookInfoSection = ({ book, navigation, id }) => {
   return (
     <View style={{ flex: 1 }}>
+    
       <ImageBackground
-        source={book.bookCover}
-        resizeMode="cover"
-        style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-        }}
+          source={book.bookCover}
+          resizeMode="cover"
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+          }}
       />
-
       <View
         style={{
           position: "absolute",

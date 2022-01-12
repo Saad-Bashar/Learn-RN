@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image, FlatList } from "react-native";
 import { COLORS, FONTS, icons, SIZES } from "../constants";
+import { SharedElement } from 'react-navigation-shared-element';
 
 const BookItem = ({ navigation, item, index }) => {
   return (
@@ -11,20 +12,24 @@ const BookItem = ({ navigation, item, index }) => {
         marginRight: SIZES.radius,
       }}
       onPress={() =>
-        navigation.navigate("BookDetail", {
+        navigation.push("BookDetail", {
+          id: item.id,
+          item: item,
           book: item,
         })
       }
     >
-      <Image
-        source={item.bookCover}
-        resizeMode="cover"
-        style={{
-          width: 180,
-          height: 250,
-          borderRadius: 20,
-        }}
-      />
+      <SharedElement id={`item.${item.id}.photo`}>
+        <Image
+          source={item.bookCover}
+          resizeMode="cover"
+          style={{
+            width: 180,
+            height: 250,
+            borderRadius: 20,
+          }}
+        />
+      </SharedElement>
 
       <View
         style={{
